@@ -1,7 +1,58 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<title>Sample lightbox</title>
+		<link rel="stylesheet" type="text/css" href="styles/style.css">
 	</head>
 	<body>
+		<div id="wrapper">
+			<h1>Simple lightbox</h1>
+			<p>Images</p>
+			<ul>
+				<li>
+					<a href="https://farm7.static.flickr.com/6130/5935338876_47b61c93a5.jpg"
+					   class="lightbox_trigger">
+						Picture 1
+					</a>
+				</li>
+				<li>
+					<a href="https://farm7.static.flickr.com/6020/5924329054_4bdc419c3a_o.jpg"
+					   class="lightbox_trigger">
+						Picture 2
+					</a>
+				</li>
+				<li>
+					<a href="https://farm7.static.flickr.com/6020/5931933181_ddb737e528.jpg"
+					   class="lightbox_trigger">
+						Picture 3
+					</a>
+				</li>
+			</ul>
+		</div>
+		<script src="https://code.jquery.com/jquery-1.6.2.min.js"></script>
+		<script>
+			$(document).ready(function () {
+				$('.lightbox_trigger').click(function(e) {
+					e.preventDefault();
+					var image_href = $(this).attr("href");
+					if ($('#lightbox').length > 0) {
+						$('#content').html('<img src="' + image_href + '" />');
+						$('#lightbox').show();
+					} else {
+						var lightbox = 
+						'<div id="lightbox">' +
+						'<p>Click to close</p>' +
+						'<div id="content">' +
+						'<img src="' + image_href +'" />' +
+						'</div>' +
+						'</div>';
+						$('body').append(lightbox);
+					}
+				});
+				$('#lightbox').live('click', function () {
+					$('#lightbox').hide();
+				});
+			});
+		</script>
 	</body>
 </html>
